@@ -1,0 +1,16 @@
+{% extends "layout.html" %}
+{% block head %} {% endblock head %}
+
+{% block body %}
+        <!-- <h1>This is the home page, so FUUU"#$&"%/!"% off! Thank you</h1> -->
+    {% for podatek in podatki %}
+        <h1>{{ podatek.offenseID }} začetek: {{ podatek.startTime }}</h1>
+        <p>{{ podatek.pomembnost }}</p>
+        <p>{{ podatek.opis}}</p>
+    {% endfor %}
+
+    {{ current_user.username }}
+
+{% endblock body %}
+
+{% block optional_js %} {%endblock optional_js %}

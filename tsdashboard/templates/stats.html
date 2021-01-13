@@ -1,0 +1,67 @@
+{% extends "layout.html" %}
+{% block head %}
+<!-- <meta http-equiv="refresh" content="5" > -->
+<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/statistika.css') }}">
+
+<script src="{{ url_for('static', filename='js/statistika.js') }}" integrity="" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.min.js" integrity="sha512-s+xg36jbIujB2S2VKfpGmlC3T5V2TF3lY48DX7u2r9XzGzgPsa6wTpOQA7J9iffvdeBN0q9tKzRxVxw1JviZPg==" crossorigin="anonymous"></script>
+{% endblock head %}
+
+{% block body %}
+
+<!-- NAVIGACIJA - TABS -->
+    <nav class="px-3 py-2 page-nav">
+        <div class="nav nav-tabs" id="nav-tab" role="tablist">
+            <a class="nav-item nav-link active" id="nav-stats-tab" data-toggle="tab" href="#nav-stats" role="tab" aria-controls="nav-stats" aria-selected="true" onclick="testFunction()">Statistika</a>
+            <a class="nav-item nav-link" id="nav-user-tab" data-toggle="tab" href="#nav-user" role="tab" aria-controls="nav-user" aria-selected="false">Uporabniki</a>
+            <a class="nav-item nav-link" id="nav-category-tab" data-toggle="tab" href="#nav-category" role="tab" aria-controls="nav-category" aria-selected="false">Kategorije</a>
+        </div>
+    </nav>
+
+<!-- VSABINA ZAVIHKOV -->
+    <div class="tab-content" id="nav-tabContent">
+        <div class="tab-pane fade show active" id="nav-stats" role="tabpanel" aria-labelledby="nav-stats-tab"><p>STATISTIKA</p>
+            <!-- <div class="chart-container" style="position: relative; width:900px; height:600px"> -->
+                <!-- <canvas id="chart1" width="900" height="600" aria-label="chart1" role="img" style="border:1px solid #d3d3d3;"></canvas> -->
+                <canvas id="chart1" width="400" height="400"></canvas>
+            <!-- </div> -->
+            
+            <!-- <canvas id="myChart" aria-label="Hello ARIA World" role="img" style="border:1px solid #d3d3d3;"></canvas> -->
+            <!-- <div class="chart-container" style="position: relative; width:900px; height:600px"> -->
+                <canvas id="chart2" aria-label="chart2" role="img" style="border:1px solid #d3d3d3;"></canvas>
+            <!-- </div> -->
+            
+            <p id="demo0"></p>
+            <p id="demo1"></p>
+            <p id="demo2"></p>
+        </div>
+        <div class="tab-pane fade" id="nav-user" role="tabpanel" aria-labelledby="nav-user-tab"><p>UPORABNIKI</p>
+            {{ username }}
+        </div>
+        <div class="tab-pane fade" id="nav-category" role="tabpanel" aria-labelledby="nav-category-tab"><p>KATEGORIJE</p>
+            {{ category }}
+        </div>
+    </div>
+
+
+
+{% endblock body %}
+
+{% block optional_js %}
+<script src="{{ url_for('static', filename='js/statistika.js') }}" integrity="" crossorigin="anonymous"></script>
+<script>
+    document.getElementById('naslov').innerHTML = 'DashBoard - ' + '{{ name }}';
+
+    setInterval(() => {
+        getUserData();
+        // getCatData();
+    }, 30000); // 30 sekund
+    // }, 3600000); // 1 ura
+    // let usersts = {{user_podatki|safe|tojson}};
+    // let usersts = "{{user_podatki|safe}}";
+    // userStat(usersts);
+    // let catsts = "{{cat_podatki|safe}}";
+    // catStat(catsts);
+</script>
+{%endblock optional_js %}
+

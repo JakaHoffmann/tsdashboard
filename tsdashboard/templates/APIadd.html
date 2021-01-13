@@ -1,0 +1,106 @@
+{% extends "layout.html" %}
+{% block head %} 
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/APIs.css') }}">
+    <script src="{{ url_for('static', filename='js/API.js') }}" integrity="" crossorigin="anonymous"></script>
+{% endblock head %}
+
+{% block body %}
+
+<form action="" method="POST">
+    {{ form.csrf_token }}
+    
+    <div class="form-group row">
+        {{ form.ime_uporabnika.label(class="col-sm-2 col-form-label") }}
+        {% if form.ime_uporabnika.errors %}
+            <div class="col-sm-10">
+                {{ form.ime_uporabnika(class="form-control is-invalid") }}
+            </div>
+            <div class="invalid-feedback">
+                {% for error in form.ime_uporabnika.errors %}
+                    <li>{{ error }}</li>
+                {% endfor %}
+            </div>
+        {% else %}
+            <div class="col-sm-10">
+                {{ form.ime_uporabnika(class="form-control") }}
+            </div>
+        {% endif %}
+    </div>
+
+    <div class="form-group row">
+        {{ form.izbor_SIEM.label(class="col-sm-2 col-form-label") }}
+        <div class="col-sm-10">
+            {{ form.izbor_SIEM(class="custom-select my-1 mr-sm-2") }}
+        </div>
+        <div class="invalid-feedback">
+            {% for error in form.izbor_SIEM.errors %}
+                <li>{{ error }}</li>
+            {% endfor %}
+            Please provide a valid city.
+        </div>
+    </div>
+
+    <div class="form-group row">
+        {{ form.api_kluc.label(class="col-sm-2 col-form-label") }}
+        <div class="col-sm-10">
+            {{ form.api_kluc(class="form-control") }}
+        </div>
+    </div>
+
+    <div class="form-group row">
+        {{ form.url.label(class="col-sm-2 col-form-label") }}
+        <div class="col-sm-10">
+            {{ form.url(class="form-control") }}
+        </div>
+    </div>
+
+    <fieldset class="form-group">
+        <div class="row">
+            <legend class="col-form-label col-sm-2 pt-0">Administracija</legend>
+            <div class="col-sm-10">
+
+                <div class="form-check">
+                    <input type="color" class="form-color-input" name="apiBarva" id="apiBarva", value="{{ barvica }}">
+                    <label class="form-color-label" for="apiBarva">Barva</label>
+                </div>
+                
+                <div class="form-check">
+                    {{ form.api_admin_dostop(class="form-check-input") }}
+                    {{ form.api_admin_dostop.label(class="form-check-label") }}
+                </div>
+
+                <div class="form-check">
+                    {{ form.izdelava_statistike(class="form-check-input") }}
+                    {{ form.izdelava_statistike.label(class="form-check-label") }}
+                </div>
+
+            </div>
+        </div>
+    </fieldset>
+    
+    <div class="form-group row">
+        {{ form.cas_preverbe.label(class="col-sm-2 col-form-label") }}
+        <div class="col-sm-10">
+            {{ form.cas_preverbe(class="form-control", placeholder="sekunde") }}
+        </div>
+    </div>
+    <div class="form-group row">
+        {{ form.cas_opozorila.label(class="col-sm-2 col-form-label") }}
+        <div class="col-sm-10">
+            {{ form.cas_opozorila(class="form-control", placeholder="sekunde") }}
+        </div>
+    </div>
+    <div class="form-group row">
+        <div class="col-sm-10">
+            {{ form.submit(class="btn btn-primary") }}
+        </div>
+    </div>
+</form>
+
+{% endblock body %}
+
+{% block optional_js %}
+<script>
+    document.getElementById('naslov').innerHTML = 'DashBoard - ' + '{{ name }}';
+</script>
+{%endblock optional_js %}

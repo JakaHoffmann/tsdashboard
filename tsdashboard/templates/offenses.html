@@ -1,0 +1,121 @@
+{% extends "layout.html" %}
+{% block head %}
+<!-- <meta http-equiv="refresh" content="5" > -->
+<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/offenses.css') }}">
+
+<script src="{{ url_for('static', filename='js/offenses.js') }}" integrity="" crossorigin="anonymous"></script>
+{% endblock head %}
+
+{% block body %}
+
+<nav id="offense-nav" class="page-nav">
+    <div class="nav nav-tabs" id="nav-tab" role="tablist">
+        <a class="nav-item nav-link active" id="nav-all-tab" data-toggle="tab" href="#nav-all" role="tab" aria-controls="nav-all" aria-selected="true">Vsi Offensi</a>
+        <a class="nav-item nav-link" id="nav-qradar-tab" data-toggle="tab" href="#nav-qradar" role="tab" aria-controls="nav-qradar" aria-selected="false">Qradar</a>
+        <a class="nav-item nav-link" id="nav-mcafee-tab" data-toggle="tab" href="#nav-mcafee" role="tab" aria-controls="nav-mcafee" aria-selected="false">McAfee</a>
+        <a class="nav-item nav-link" id="nav-splunk-tab" data-toggle="tab" href="#nav-splunk" role="tab" aria-controls="nav-splunk" aria-selected="false">Splunk</a>
+    </div>
+</nav>
+
+<div class="tab-content" id="nav-tabContent">
+    <!-- VSI OFFENSI -->
+    <div class="tab-pane fade show active" id="nav-all" role="tabpanel" aria-labelledby="nav-all-tab">
+        <section>
+            <div id="all-offense">
+                <h1><div id="currentTime" class="mx-auto m-2 h-50 w-auto text-center"></div></h1>
+                <!-- KARTICE -->
+                <div class="row">
+
+                        <div class="col-sm-3">
+                            <div id="Telekom_Slovenije_d.d." class="card text-white mb-3">
+                                <div class="card-header text-center"><h3>Podjetje 1</h3></div>
+                                <div class="card-body">
+                                    <div id="Telekom_Slovenije_d.d._offense_id"><p>Offense ID:</p><h4></h4></div>
+                                    <div id="Telekom_Slovenije_d.d._start_time"><p>Začetek:</p><h4></h4></div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-sm-3">
+                            <div id="Iskratel" class="card text-white mb-3">
+                                <div class="card-header text-center"><h3>Podjetje 2</h3></div>
+                                <div class="card-body">
+                                    <div id="Iskratel_offense_id"><p>Offense ID:</p><h4></h4></div>
+                                    <div id="Iskratel_start_time"><p>Začetek:</p><h4></h4></div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="col-sm-3">
+                            <div id="Zavarovalnica_Triglav_d.d." class="card text-white mb-3">
+                                <div class="card-header text-center"><h3>Podjetje 3</h3></div>
+                                <div class="card-body">
+                                    <div id="Zavarovalnica_Triglav_d.d._offense_id"><p>Offense ID:</p><h4></h4></div>
+                                    <div id="Zavarovalnica_Triglav_d.d._start_time"><p>Začetek:</p><h4></h4></div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="col-sm-3">
+                            <div id="oblak" class="card text-white mb-3">
+                                <div class="card-header text-center"><h3>Podjetje 4</h3></div>
+                                <div class="card-body">
+                                    <div id="oblak_offense_id"><p>Offense ID:</p><h4></h4></div>
+                                    <div id="oblak_start_time"><p>Začetek:</p><h4></h4></div>
+                                </div>
+                            </div>
+                        </div>
+
+                </div>
+
+            </div>
+        </section>
+    </div>
+    <!-- QRADAR -->
+    <div class="tab-pane fade" id="nav-qradar" role="tabpanel" aria-labelledby="nav-qradar-tab">
+        <section>
+            <div id="qradar-offense">
+                <table id="qradar-Table" class="table table-striped">
+                </table>
+            </div>
+        </section>
+    </div>
+    <!-- MCAFEE -->
+    <div class="tab-pane fade" id="nav-mcafee" role="tabpanel" aria-labelledby="nav-mcafee-tab">
+        <section>
+            <div id="mcafee-offense">
+                <table id="mcafee-Table" class="table table-striped">
+                </table>
+            </div>
+        </section>
+    </div>
+    <!-- SPLUNK -->
+    <div class="tab-pane fade" id="nav-splunk" role="tabpanel" aria-labelledby="nav-splunk-tab">
+        <section>
+            <div id="splunk-offense">
+                <table id="splunk-Table" class="table table-striped">
+                </table>
+            </div>
+        </section>
+    </div>
+</div>
+
+
+
+
+    
+{% endblock body %}
+
+{% block optional_js %} 
+<script>
+    document.getElementById('naslov').innerHTML = 'DashBoard - ' + '{{ name }}';
+
+    init();
+    setInterval(() => {
+      checkNew();
+      refreshTime();
+    }, 30000);
+
+
+</script>
+{%endblock optional_js %}

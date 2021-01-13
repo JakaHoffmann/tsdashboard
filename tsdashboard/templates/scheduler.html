@@ -1,0 +1,110 @@
+{% extends "layout.html" %}
+{% block head %}
+<!-- <meta http-equiv="refresh" content="60" > -->
+<link rel="stylesheet" href="{{ url_for('static', filename='css/jobs.css') }}" integrity="" crossorigin="anonymous">
+<script src="{{ url_for('static', filename='js/jobs.js') }}" integrity="" crossorigin="anonymous"></script>
+{% endblock head %}
+
+{% block body %}
+{{ test_tmp }}
+
+<div class="tab">
+    <button class="tablinks" onclick="openJobs(event, 'seznam')" id="defaultOpen">Seznam</button>
+    <button class="tablinks" onclick="openJobs(event, 'dodaj')">Dodaj</button>
+    <button class="tablinks" onclick="openJobs(event, 'popravi')" id="btnEdit">Edit</button>
+</div>
+
+<div id="seznam" class="tabcontent">
+    <table id="timersTableID">
+        <tr>
+            <td>ID</td>
+            <td>ime</td>
+            <td>trigger</td>
+            <td>naslednji zagon</td>
+            <td>funkcija</td>
+            <td>pavza/nadaljuj</td>
+            <td>zbriši</td>
+        </tr>
+        {% for job in jobs %}
+        <tr>
+            <td>{{ job.id }}</td>
+            <td>{{ job.name }}</td>
+            <td>{{ job.trigger }}</td>
+            <td>{{ job.next_run_time }}</td>
+            <td>{{ job.func_ref }}</td>
+            <!-- <td><button type="submit" id="btnPause" class="material-icons">pause_circle_outline</button></td> -->
+            {% if job.next_run_time is none %}
+                <td><a href="{{ url_for('timers.resume_timer', id=job.id) }}" id="btn-pause-{{ job.id }}" class="btn material-icons">play_circle_outline</a></td>
+            {% else %}
+                <td><a href="{{ url_for('timers.pause_timer', id=job.id) }}" id="btn-pause-{{ job.id }}" class="btn material-icons">pause_circle_outline</a></td>
+            {% endif %}
+            <!-- <td><button type="submit" id="btnEdit" name="{{ job.id }}" class="material-icons">edit</button></td> -->
+            <!-- <td><button type="submit" id="btnDelete" name="{{ job.id }}" class="material-icons">delete_outline</button></td> -->
+            <td><a href="{{ url_for('timers.delete_timer', id=job.id) }}" id="btn-delete-{{ job.id }}" class="btn material-icons">delete_outline</a></td>
+        </tr>
+        {% endfor %}
+    </table>
+</div>
+  
+<div id="dodaj" class="tabcontent">
+    <table id="timersAddTableID">
+        <tr>
+            <td>ID</td>
+            <td>ime</td>
+            <td>trigger</td>
+            <td>funkcija</td>
+        </tr>
+        <tr>
+            <td><input type="text" id="timerID"></td>
+            <td><input type="text"></td>
+            <td>
+                <select name="triggerSelect" id="trigerSelect" onchange="triggerFunc()">
+                    <option value="" selected disabled>Izberi vrsto</option>
+                    <option value="interval">Interval Trigger</option>
+                    <option value="cron">Cron Trigger</option>
+                </select>
+                <!-- <input type="text" id="triggerInput"> -->
+            </td>
+            <td><input type="text"></td>
+            <td><button id="btnAdd" class="material-icons">add_circle_outline</button></td>
+            <td><button id="btnAdd" class="material-icons">save</button></td>
+            <td><button id="btnAdd" class="material-icons">autorenew</button></td>
+            <td><button id="btnAdd" class="material-icons">remove_circle_outline</button></td>
+        </tr>
+    </table>
+</div>
+  
+<div id="popravi" class="tabcontent">
+    <!-- <form action="{{ url_for('timers.edit_timer', id=jobID) }}" method="post"> -->
+        <form action="#" id="editForm" method="post">
+        <table id="timersEditTableID">
+            <tr>
+                <td>ID</td>
+                <td>ime</td>
+                <td>trigger</td>
+                <td>naslednji zagon</td>
+                <td>funkcija</td>
+                <td>shrani</td>
+                <!-- <td>pavza/nadaljuj</td> -->
+                <!-- <td>popravi</td> -->
+                <!-- <td>zbriši</td> -->
+            </tr>
+        </table>
+    </form>
+</div>
+
+
+    
+    <br>
+    
+{% endblock body %}
+
+{% block optional_js %}
+<script>
+    // tmp = [];
+    // {% for job in jobs %}
+    //     tmp[{{ loop.index0 }}] = ["{{ job.id }}", "{{ job.name }}", "{{ job.trigger }}", "{{ job.next_run_time }}", "{{ job.func_ref }}"];
+    // {% endfor %}
+    // jobFunction(tmp);
+</script>
+{%endblock optional_js %}

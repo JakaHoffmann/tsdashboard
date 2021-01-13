@@ -1,0 +1,41 @@
+{% extends "layout.html" %}
+{% block head %} 
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/dogodek.css') }}">
+    <script src="{{ url_for('static', filename='js/dogodek.js') }}" integrity="" crossorigin="anonymous"></script>
+{% endblock head %}
+{% block body %}
+<div id="dogodek-container-div">
+    <div id="naslovni-del">
+        <a id="predhodni-mesec" href="#" class="btn">&laquo;</a>
+        <a id="predhodni-dan" href="#" class="btn">&#8249;</a>
+        <h1>{{ name }}</h1>
+        <a id="naslednji-dan" href="#" class="btn">&#8250;</a>
+        <a id="naslednji-mesec" href="#" class="btn">&raquo;</a>
+    </div>
+
+
+    <fieldset class="skrit">
+        <legend>zanimivi primeri</legend>
+    </fieldset>
+    <fieldset class="skrit">
+        <legend>opažanja</legend>
+    </fieldset>
+    <fieldset class="skrit">
+        <legend>dolgotrajni dogodki</legend>
+    </fieldset>
+    <fieldset class="skrit">
+        <legend>projekti</legend>
+    </fieldset>
+    <fieldset class="skrit">
+        <legend>ostalo</legend>
+    </fieldset>
+</div>
+{% endblock body %}
+
+{% block optional_js %}
+<script>
+    let name = "{{ name }}";
+    urediNaslov(name);
+    document.getElementById('naslov').innerHTML = 'DashBoard - ' + '{{ name }}';
+</script>
+{%endblock optional_js %}

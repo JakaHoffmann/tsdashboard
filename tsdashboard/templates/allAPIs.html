@@ -1,0 +1,64 @@
+{% extends "layout.html" %}
+{% block head %}
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/APIs.css') }}" integrity="" crossorigin="anonymous">
+    <script src="{{ url_for('static', filename='js/APIs.js') }}" integrity="" crossorigin="anonymous"></script>
+{% endblock head %}
+
+{% block body %}
+
+<nav>
+    <ul class="nav nav-tabs">
+        <li class="nav-item">
+        <a class="nav-link active" href="#">kaj imamo</a>
+        </li>
+        <li class="nav-item">
+        <a class="nav-link disabled" href="#">Siem predloga</a>
+        </li>
+        <li class="nav-item ml-auto">
+            <a href="{{ url_for('apis.APIadd') }}" class="nav-link material-icons">add</a>
+        </li>
+    </ul>
+</nav>
+
+<table id="api-tabela" class="table table-striped">
+    <thead class="thead-dark">
+        <tr>
+            <th scope="col">ime</th>
+            <th scope="col">tip</th>
+            <th scope="col">API</th>
+            <th scope="col">url</th>
+            <th scope="col">preveri</th>
+            <th scope="col">opozori</th>
+            <th scope="col">popravi</th>
+            <th scope="col">zbriši</th>
+        </tr> 
+    </thead>
+
+    {% for api in apis %}
+        <tr id="id-{{ api.id }}" style="color:{{ api.barva }}"}> 
+            <th>{{ api.ime }}</th>
+            <td>{{ api.izbor }}</td>
+            <td>{{ api.api_key }}</td>
+            <td>{{ api.url }}</td>
+            <td>{{ api.cas_spremljanja }}</td>
+            <td>{{ api.cas_opozorila }}</td>
+            <td>
+                <a href="{{ url_for('apis.APIedit', id=api.id) }}" id="btn-id-{{ api.id }}" class="btn material-icons">edit</a>
+            </td>
+            <td>
+                <a href="{{ url_for('apis.APIdelete', id=api.id) }}" id="btn-id-{{ api.id }}" class="btn material-icons">delete_outline</a>
+            </td>
+        </tr>
+    {% endfor %}
+</table>
+
+
+{% endblock body %}
+
+{% block optional_js %}
+<script>
+    let siemi = "{{ apis|safe }}";
+    nastaviTabelo(siemi);
+    document.getElementById('naslov').innerHTML = 'DashBoard - ' + '{{ name }}';
+</script>
+{% endblock optional_js %}

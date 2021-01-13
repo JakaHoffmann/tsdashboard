@@ -1,0 +1,9 @@
+{
+    "version": 3,
+    "mappings": "AAAA,AAAA,KAAK,CAAC;EACF,UAAU,EAAE,CAAC,CAAC,GAAG,CAAC,GAAG,CAAC,CAAC,CAAC,kBAAkB;EAE1C,MAAM,EAAE,IAAI;EAEZ,WAAW,EAAE,KAAK;CACrB;;AAID,AAAA,UAAU,CAAC;EACP,gBAAgB,EAAE,KAAK;EACvB,KAAK,EAAE,KAAK;CACb;;AAEH,AAAA,UAAU,CAAC;EACP,OAAO,EAAE,IAAI;CAChB",
+    "sources": [
+        "scss/offenses.scss"
+    ],
+    "names": [],
+    "file": "offenses.css"
+}

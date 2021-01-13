@@ -1,0 +1,84 @@
+{% extends "layout.html" %}
+{% block head %}
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/info.css') }}">
+    <script src="{{ url_for('static', filename='js/info.js') }}" integrity="" crossorigin="anonymous"></script>
+{% endblock head %}
+
+{% block body %}
+<div id="info-container-div">
+    <div id="informacije-div">
+        <form action="" method="post">
+            {{ form.csrf_token }}
+            <div class="zanimivi-primeri">
+                {{ form.zanimivi_primeri.label() }}
+                {{ form.zanimivi_primeri_cas() }}
+                {{ form.zanimivi_primeri() }}
+            </div>
+            
+            <div class="opazanja">
+                {{ form.opazanja.label() }}
+                {{ form.opazanja_cas() }}
+                {{ form.opazanja() }}
+            </div>
+            
+            <div class="dolgotrajne-napake">
+                {{ form.dolgotrajne_napake.label() }}
+                {{ form.dolgotrajne_napake_cas() }}
+                {{ form.dolgotrajne_napake() }}
+            </div>
+
+            <div class="projekti">
+                {{ form.projekti.label() }}
+                {{ form.projekti_cas() }}
+                {{ form.projekti() }}
+            </div>
+
+            <div class="ostalo">
+                {{ form.ostalo.label() }}
+                {{ form.ostalo_cas() }}
+                {{ form.ostalo() }}
+            </div>
+
+            <div class="sub-btn">{{ form.submit() }}</div>
+        </form>
+    </div>
+    <div id="koledar">
+        <table id=kuledar>
+            <tr id=vrstica1 align="center">
+                <td>&lt;</td><td colspan=5>mesec + leto</td><td>&gt;</td>
+            </tr>
+            <tr id=vrstica2 align="center">
+                <td></td><td></td><td></td><td></td><td></td><td></td><td></td>
+            </tr>
+            <tr id=vrstica3 align="center">
+                <td></td><td></td><td></td><td></td><td></td><td></td><td></td>
+            </tr>
+            <tr id=vrstica4 align="center">
+                <td></td><td></td><td></td><td></td><td></td><td></td><td></td>
+            </tr>
+            <tr id=vrstica5 align="center">
+                <td></td><td></td><td></td><td></td><td></td><td></td><td></td>
+            </tr>
+            <tr id=vrstica6 align="center">
+                <td></td><td></td><td></td><td></td><td></td><td></td><td></td>
+            </tr>
+            <tr id=vrstica7 align="center">
+                <td></td><td></td><td></td><td></td><td></td><td></td><td></td>
+            </tr>
+            <tr id=vrstica8 align="center">
+                <td></td><td></td><td></td><td></td><td></td><td></td><td></td>
+            </tr>
+            <tr id=vrstica9 align="center">
+                <td colspan=6></td><td></td>
+            </tr>
+        </table>
+    </div>
+</div>
+
+{% endblock body %}
+
+{% block optional_js %}
+<script>
+    document.getElementById('naslov').innerHTML = 'DashBoard - ' + '{{ name }}';
+</script>
+{%endblock optional_js %}
